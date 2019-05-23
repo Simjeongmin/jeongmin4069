@@ -16,19 +16,22 @@
 				<Insets top="10" right="10" bottom="10" left="10" />
 			</padding>
 			<children>
-				<Button fx:id="btnSaveFileDir" translateX="396">저장폴더</Button>
-				<TextField fx:id="txtSaveFileDir" translateX="398"
-					prefWidth="150" promptText="폴더를 선택하세요" />
-				<Button fx:id="btnExcel" translateX="400">엑셀파일</Button>
+				<Button fx:id="btnList">새로 고침</Button>
+				<!-- <TextField fx:id="txtSearch" prefWidth="50"
+					promptText="이름" />
+				<Button fx:id="btnSearch">검 색</Button> -->
+				<Button fx:id="btnDelete">삭 제</Button>
+				<Button fx:id="btnSaveFileDir">저장폴더</Button>
+				<TextField fx:id="txtSaveFileDir" prefWidth="200"
+					promptText="폴더를 선택하세요" />
+				<Button fx:id="btnExcel">엑셀파일</Button>
 
 			</children>
 		</HBox>
 		<padding>
 			<Insets top="10" right="10" bottom="10" left="10" />
 		</padding>
-		<TableView fx:id="tableView" prefHeight="350"
-			prefWidth="690">
+		<TableView fx:id="tableView" prefHeight="480" prefWidth="150">
 		</TableView>
 	</VBox>
 </AnchorPane>
-

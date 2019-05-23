@@ -11,10 +11,11 @@ import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
+import Model.EnrollmentTabVO;
 import Model.StudentVO;
 
 public class StudentExcel {
-	public boolean xlsxWiter(List<StudentVO> list, String saveDir) {
+	public boolean xlsxWiter(List<EnrollmentTabVO> list, String saveDir) {
 		// 워크북 생성
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		// 워크시트 생성
@@ -34,12 +35,13 @@ public class StudentExcel {
 		cell.setCellValue("반");
 		cell = row.createCell(4);
 		cell.setCellValue("출석번호");
-		/*
-		 * cell = row.createCell(5); cell.setCellValue("출석여부");
-		 */
+		cell = row.createCell(5);
+		cell.setCellValue("출석여부");
+		cell = row.createCell(6);
+		cell.setCellValue("출석날짜");
 
 		// 리스트의 size 만큼 row 생성
-		StudentVO vo;
+		EnrollmentTabVO vo;
 		for (int rowldx = 0; rowldx < list.size(); rowldx++) {
 			vo = list.get(rowldx);
 
@@ -56,10 +58,12 @@ public class StudentExcel {
 			cell.setCellValue(vo.getS_ban());// 반
 			cell = row.createCell(4);
 			cell.setCellValue(vo.getS_number());
-			// 출석번호
-			/*
-			 * cell = row.createCell(0); cell.setCellValue(vo.getNo());//출석여부
-			 */ }
+			cell = row.createCell(5);
+			cell.setCellValue(vo.getA_come());// 출석여부
+			cell = row.createCell(6);
+			cell.setCellValue(vo.getA_day());// 출석날짜
+
+		}
 
 		// 입력된 내용 파일 쓰기
 		String strReportPDFName = "student_" + System.currentTimeMillis() + ".xlsx";
