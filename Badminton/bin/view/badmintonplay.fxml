@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tab?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" 
+fx:controller="controller.BadmintonplayController" prefHeight="700" prefWidth="500">
+
+	<top>
+	<VBox>
+		<children>
+			<MenuBar>
+				<menus>
+					<Menu text="레슨 등급">
+						<items>
+							<MenuItem text="초급" fx:id="menulow">
+							</MenuItem>
+							<MenuItem text="중급" fx:id="menumid">
+							</MenuItem>
+							<MenuItem text="고급" fx:id="menuhigh">
+							</MenuItem>
+						</items>
+					</Menu>
+				</menus>
+			</MenuBar>
+		</children>
+	</VBox>
+	</top>
+
+	<center>
+		<TabPane  tabClosingPolicy="UNAVAILABLE" fx:id="mainPane">
+			<tabs>
+				<Tab text="등록" fx:id="check">
+				<content>
+					<fx:include fx:id="checkTab"
+						source="checkTab.fxml"/>
+				</content>
+				</Tab>
+				<Tab text="레슨일정(초급)" fx:id="low">
+				<content>
+					<fx:include fx:id="lowTab"
+						source="lowTab.fxml"/>
+				</content>				
+				</Tab>	
+				<Tab text="레슨일정(중급)" fx:id="mid">
+				<content>
+					<fx:include fx:id="midTab"
+						source="midTab.fxml"/>
+				</content>
+				</Tab>
+				<Tab text="레슨일정(고급)" fx:id="high">
+				<content>
+					<fx:include fx:id="highTab"
+						source="highTab.fxml"/>
+				</content>
+				</Tab>
+			</tabs>
+		</TabPane>
+	</center>
+	
+	
+	
+	
+</BorderPane>
+

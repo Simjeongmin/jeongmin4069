@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.collections.ObservableList?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1">
+	<padding>
+		<Insets bottom = "10.0" left="20.0" top="20.0" />
+	</padding>
+	<center>
+		<GridPane hgap="10.0" vgap="10.0">
+		<children>
+				<Label text="번호 :" prefWidth="50" GridPane.rowIndex="1"/>
+				<Label text="성명 :" prefWidth="50" GridPane.rowIndex="2"/>
+				<Label text="학년 :" prefWidth="50" GridPane.rowIndex="3"/>
+				<Label text="반 :"  prefWidth="50" GridPane.rowIndex="4"/>
+				<Label text="출석번호:"  prefWidth="50" GridPane.rowIndex="5"/>
+				<Label text="성별: "  prefWidth="50" GridPane.rowIndex="6"/>
+				<Label text="휴대폰: "  prefWidth="150" GridPane.rowIndex="7"/>
+				<Label text="비상연락망:" prefWidth="150" GridPane.rowIndex="8"/>
+				<Label text="수업료:" prefWidth="150" GridPane.rowIndex="9"/>
+				<Label text="수업시간:" prefWidth="50" GridPane.rowIndex="10"/>
+				<Label text="본인경험:" prefWidth ="50" GridPane.rowIndex="11"/>
+				<Label text="등급별 가격:" prefWidth="50" GridPane.rowIndex="12"/>
+				<Label text="시작 날짜:" prefWidth="100" GridPane.rowIndex="13"/>
+				<Label text="끝난 날짜:" prefWidth="100" GridPane.rowIndex="14"/>
+				<Label text="이메일:"  prefWidth="180" GridPane.rowIndex="15"/>
+				<TextField id="txtNo" prefWidth="100"
+					GridPane.columnIndex="1"  GridPane.rowIndex="1" />
+				<TextField id="txts_code" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+				<TextField id="txts_name" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+				<TextField id="txts_year" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+				<TextField id="txts_ban" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+				<TextField id="txts_number" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+				<TextField id="txts_gender" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+				<TextField id="txts_phone" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+				<TextField id="txts_emergency" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+				<TextField id="txts_costfree" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+				<TextField id="txts_time" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="10"/>
+				<TextField id="txts_experience" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="11"/>
+				<TextField id="txts_level" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="12"/>
+				<TextField id="txts_startdate" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="13"/>
+				<TextField id="txts_enddate" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="14"/>
+				<TextField id="txts_email" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="15"/>
+		</children>
+		</GridPane>
+	</center>
+	<bottom>
+		<HBox alignment="CENTER" spacing="20.0">
+		<BorderPane.margin>
+			<Insets top="20.0" bottom="10"/>
+		</BorderPane.margin>
+		<children>
+			<Button id="btnFormAdd" text="저장"/>
+			<Button id="btnFormCancel" text="취소"/>
+		</children>
+		</HBox>
+	</bottom>
+</BorderPane>
+

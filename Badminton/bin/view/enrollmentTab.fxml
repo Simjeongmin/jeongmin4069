@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.RadioButton?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="controller.EnrollmentTabController" prefHeight="400"
+	prefWidth="700">
+	<HBox>
+		<VBox alignment="CENTER">
+			<HBox>
+				<padding>
+					<Insets top="10" right="10" bottom="10" left="10" />
+				</padding>
+				<children>
+					<Label text="담당선생님: " />
+					<Label fx:id="lblTeacherName" />
+				</children>
+			</HBox>
+			<HBox alignment="CENTER">
+				<padding>
+					<Insets top="0" right="10" bottom="10" left="10" />
+				</padding>
+				<children>
+					<Label text=" 이름  " />
+					<Label text=" 학년  " />
+					<Label text=" 반  " />
+					<Label text=" 출석번호  " />
+
+				</children>
+			</HBox>
+
+			<HBox>
+				<children>
+					<TextField fx:id="txtS_name" prefWidth="30" />
+					<TextField fx:id="txtS_year" prefWidth="30" />
+					<TextField fx:id="txtS_ban" prefWidth="30" />
+					<TextField fx:id="txtS_number" prefWidth="30" />
+				</children>
+			</HBox>
+		</VBox>
+
+		<VBox>
+			<HBox>
+				<padding>
+					<Insets top="10" right="10" bottom="10" left="10" />
+				</padding>
+				<Label text=" 출석여부 " />
+				<Label text=" 날짜:  " />
+				<DatePicker fx:id="dpDate"></DatePicker>
+			</HBox>
+
+
+			<HBox alignment="CENTER">
+				<spacing>10</spacing>
+				<children>
+					<Label text="선택: " />
+					<fx:define>
+						<ToggleGroup fx:id="genderGroup" />
+					</fx:define>
+					<RadioButton fx:id="rbMale" userData="출석" text="출석"
+						toggleGroup="$genderGroup" selected="true" />
+					<RadioButton fx:id="rbFemale" userData="결석" text="결석"
+						toggleGroup="$genderGroup" />
+				</children>
+			</HBox>
+
+			<HBox >
+				<Button fx:id="btnCheck">등 록</Button>
+				<Button fx:id="btnExit" translateX="280" translateY="250">종 료</Button>
+
+			</HBox>
+
+		</VBox>
+
+	</HBox>
+</AnchorPane>
+
