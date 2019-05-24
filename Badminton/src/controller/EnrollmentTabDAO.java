@@ -66,7 +66,7 @@ public class EnrollmentTabDAO {
 		ArrayList<String> columns_Name = new ArrayList<String>();
 		StringBuffer sql = new StringBuffer();
 		sql.append("select * from student");
-		System.out.println(sql);
+		// System.out.println(sql);
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -301,7 +301,7 @@ public class EnrollmentTabDAO {
 
 	// 학생 출석 여부 변경 0 -> 1
 	public void setStudentAttendanceChange(EnrollmentTabVO evo) {
-		String sql = "update student set S_come = 1 where s_code = ?";
+		String sql = "update student set s_come = 1 where s_code = ?";
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -321,26 +321,27 @@ public class EnrollmentTabDAO {
 		}
 
 	}
-	// 학생 출석 여부 변경  1-> 0
-		public void setStudentModification(EnrollmentTabVO evo) {
-			String sql = "update student set s_come = 1 where s_come = s_come ";
 
-			Connection con = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			try {
-				con = DBUtil.getConnection();
-				pstmt = con.prepareStatement(sql);
+	// 학생 출석 여부 변경 1-> 0
+	public void setStudentModification(EnrollmentTabVO evo) {
+		String sql = "update student set s_come = 1 where s_come = s_come ";
 
-				System.out.println(evo.getS_come());
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(sql);
 
-				pstmt.setInt(1, evo.getS_come());
+			System.out.println(evo.getS_come());
 
-			//	int i = pstmt.executeUpdate();
+			pstmt.setInt(1, evo.getS_come());
 
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+			// int i = pstmt.executeUpdate();
 
+		} catch (Exception e) {
+			// TODO: handle exception
 		}
+
+	}
 }

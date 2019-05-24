@@ -69,13 +69,14 @@ public class EnrollmentTabController implements Initializable {
 	@Override
 
 	public void initialize(URL location, ResourceBundle resources) {
+		btnReset.setDisable(true);// 초기화버튼 활성
 		System.out.println("출석부 컨트롤");
 		dpDate.setValue(LocalDate.now());// 오늘날짜 설정
 		choiceGroup.selectToggle(null);
 		// 키이벤트
 		btnExit.setOnAction(event -> handlerBtnExitActoion(event)); // 메인창이동
 		btnCheck.setOnAction(event -> handlerBtnCheckActoion(event));// 등록
-		btnReset.setOnAction(event -> handlerBtnResetActoion(event));// 학생 선택 초기화
+		// btnReset.setOnAction(event -> handlerBtnResetActoion(event));// 학생 선택 초기화
 
 		tableView.setOnMouseClicked(event -> handlerBtnPieChartAction(event));// 테이블에 선택한 정보 저장
 
@@ -117,40 +118,24 @@ public class EnrollmentTabController implements Initializable {
 		tableView.setItems(data);
 	}
 
-	// 학생 출석 여부 초기화
-	public void handlerBtnResetActoion(ActionEvent event) {
-		try {
-
-			EnrollmentTabVO evo = null;
-			EnrollmentTabDAO edao = null; // 출석 여부,이름.학년,반
-			// 출석번호 //
-			no = selectStudent.get(0).getS_code(); //
-			evo = new EnrollmentTabVO(choiceGroup.getSelectedToggle().getUserData().toString(), no);
-
-			edao = new EnrollmentTabDAO(); //
-			edao.setStudentAttendance(evo); // 학생 출석 등록
-
-			edao.setStudentModification(evo); // 학생 출석 여부 컬럼 변경
-
-			if (edao != null) {
-				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("출석부 등록");
-				alert.setHeaderText("초기화");
-				alert.setContentText("등록 완료");
-				alert.showAndWait(); //
-				data.removeAll(data);
-				totalList();
-				tableView.setItems(data);
-			}
-
-		} catch (Exception e) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("출석부");
-			alert.setHeaderText("초기화");
-			alert.setContentText("등록 실패");
-			alert.showAndWait();
-		}
-	}
+	/*
+	 * // 학생 출석 여부 초기화 public void handlerBtnResetActoion(ActionEvent event) { try {
+	 * System.out.println("초기화"); EnrollmentTabVO evo = null; EnrollmentTabDAO edao
+	 * = null;
+	 * 
+	 * edao = new EnrollmentTabDAO(); //
+	 * 
+	 * edao.setStudentModification(evo); // 학생 출석 여부 컬럼 변경
+	 * 
+	 * if (edao != null) { Alert alert = new Alert(AlertType.INFORMATION);
+	 * alert.setTitle("출석부 등록"); alert.setHeaderText("초기화");
+	 * alert.setContentText("등록 완료"); alert.showAndWait(); // data.removeAll(data);
+	 * totalList(); tableView.setItems(data); }
+	 * 
+	 * } catch (Exception e) { Alert alert = new Alert(AlertType.WARNING);
+	 * alert.setTitle("출석부"); alert.setHeaderText("초기화");
+	 * alert.setContentText("등록 실패"); alert.showAndWait(); } }
+	 */
 
 	// 마우스이벤트 핸들러
 	public void handlerBtnPieChartAction(MouseEvent event) {
@@ -184,11 +169,10 @@ public class EnrollmentTabController implements Initializable {
 			// 출석 여부,이름.학년,반 출석번호
 			no = selectStudent.get(0).getS_code();
 			evo = new EnrollmentTabVO(choiceGroup.getSelectedToggle().getUserData().toString(), no);
-
 			edao = new EnrollmentTabDAO();
 			edao.setStudentAttendance(evo); // 학생 출석 등록
+			System.out.println("ㅁㅁㅁㅁㅁㅁ");
 			edao.setStudentAttendanceChange(evo); // 학생 출석 여부 컬럼 변경
-
 			if (edao != null) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("출석부 등록");

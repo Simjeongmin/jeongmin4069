@@ -627,7 +627,7 @@ public class MainController implements Initializable {
 		ArrayList<StudentVO> list;
 		title = sDao.getColumnName();
 		int columnCount = title.size();
-		list = sDao.getStudentTotal();
+		list = sDao.getStudentTotal1();
 		int rowCount = list.size();
 		totalData = new Object[rowCount][columnCount];
 		for (int index = 0; index < rowCount; index++) {
