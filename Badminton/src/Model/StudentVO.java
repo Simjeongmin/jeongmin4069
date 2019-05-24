@@ -17,7 +17,7 @@ public class StudentVO {
 	private String s_enddate;//종료일
 	private String s_email;//부모님이메일
 	private String s_image =null;//이미지 파일 경로
-	
+	private int s_come;//
 	
 	
 	public StudentVO() {
@@ -145,13 +145,28 @@ public StudentVO(int s_code, String s_name, int s_year, int s_ban, int s_number,
 }
 
 
-
-
-
 //접근자 설정자
+
+
 public int getS_code() {
 	return s_code;
 }
+
+
+
+
+public int getS_come() {
+	return s_come;
+}
+
+
+
+
+
+public void setS_come(int s_come) {
+	this.s_come = s_come;
+}
+
 
 
 

@@ -79,11 +79,11 @@ public class CheckTabController implements Initializable {
 		colc_level.setCellValueFactory(new PropertyValueFactory<>("c_level"));
 		
 		TableColumn colc_time= new TableColumn("수업날짜");
-		colc_time.setMaxWidth(70);
+		colc_time.setMaxWidth(120);
 		colc_time.setCellValueFactory(new PropertyValueFactory<>("c_time"));
 		
 		TableColumn colc_content= new TableColumn("수업내용");
-		colc_content.setMaxWidth(100);
+		colc_content.setMaxWidth(160);
 		colc_content.setCellValueFactory(new PropertyValueFactory<>("c_content"));
 		
 		tableView.getColumns().addAll(colc_code, colc_day, colc_level, colc_time, colc_content);

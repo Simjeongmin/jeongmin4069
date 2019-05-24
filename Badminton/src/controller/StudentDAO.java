@@ -19,8 +19,8 @@ public class StudentDAO {
 		sql.append("insert into student  ");
 		sql.append("(S_code, S_name, S_year, S_ban, " + "S_number, S_gender, S_phone , "
 				+ "S_emergency, S_costfree, S_time, " + "S_experience, S_level, S_startdate,"
-				+ "S_enddate, S_email, S_image) ");
-		sql.append(" values (student_seq.nextval, ?" + ", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				+ "S_enddate, S_email, S_image, S_come) ");
+		sql.append(" values (student_seq.nextval, ?" + ", ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,0)");
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		StudentVO retval = null;
@@ -55,9 +55,9 @@ public class StudentDAO {
 			retval = new StudentVO();
 
 		} catch (SQLException e) {
-			
+			System.out.println("1e=[" + e + "]");
 		} catch (Exception e) {
-			System.out.println("e=[" + e + "]");
+			System.out.println("2e=[" + e + "]");
 		} finally {
 			try {
 				// 6데이터 베이스와의 연결에 사용되었던 오브젝트를 해제
@@ -73,13 +73,74 @@ public class StudentDAO {
 		return retval;
 	}
 
-	// 학생 전체 리스트
+	// 출석부 학생 전체 리스트
 	public ArrayList<StudentVO> getStudentTotal() {
 		ArrayList<StudentVO> list = new ArrayList<StudentVO>();
 		StringBuffer sql = new StringBuffer();
 		sql.append("select S_code, S_name, S_year, S_ban, S_number, S_gender, ");
 		sql.append("S_phone, S_emergency, S_costfree, S_time, S_experience, S_level, ");
-		sql.append("S_startdate, S_enddate, S_email, S_image from student order by S_code desc");
+		sql.append(
+				"S_startdate, S_enddate, S_email, S_image, S_come from student where S_come = 0 order by S_code desc");
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StudentVO sVo = null;
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(sql.toString());
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				sVo = new StudentVO();
+				sVo.setS_code(rs.getInt("S_code"));
+				sVo.setS_name(rs.getString("S_name"));
+				sVo.setS_year(rs.getInt("S_year"));
+				sVo.setS_ban(rs.getInt("S_ban"));
+				sVo.setS_number(rs.getInt("S_number"));
+				sVo.setS_gender(rs.getString("S_gender"));
+				sVo.setS_phone(rs.getString("S_phone"));
+				sVo.setS_emergency(rs.getString("S_emergency"));
+				sVo.setS_costfree(rs.getString("S_costfree"));
+				sVo.setS_time(rs.getInt("S_time"));
+				sVo.setS_experience(rs.getString("S_experience"));
+				sVo.setS_level(rs.getString("S_level"));
+				sVo.setS_startdate(rs.getString("S_startdate"));
+				sVo.setS_enddate(rs.getString("S_enddate"));
+				sVo.setS_email(rs.getString("S_email"));
+				sVo.setS_image(rs.getString("S_image"));
+				sVo.setS_come(rs.getInt("S_come"));
+
+				list.add(sVo);
+
+			}
+		} catch (SQLException se) {
+			System.out.println(se);
+
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException se) {
+
+			}
+		}
+		return list;
+
+	}
+
+	// 메인창 학생 전체 리스트
+	public ArrayList<StudentVO> getStudentTotal1() {
+		ArrayList<StudentVO> list = new ArrayList<StudentVO>();
+		StringBuffer sql = new StringBuffer();
+		sql.append("select S_code, S_name, S_year, S_ban, S_number, S_gender, ");
+		sql.append("S_phone, S_emergency, S_costfree, S_time, S_experience, S_level, ");
+		sql.append("S_startdate, S_enddate, S_email, S_image, S_come from student order by S_code desc");
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -228,6 +289,7 @@ public class StudentDAO {
 		}
 		return retval;
 	}
+
 //학생삭제
 	public void getStudentDelete(int s_Code) throws Exception {
 		// 2 데이터 처리를 위한 sql문
@@ -235,7 +297,7 @@ public class StudentDAO {
 		sql.append("delete from student where s_code = ?");
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
+
 		try {
 			// 3 DButil 이라는 클래스의 getConnection()메서드로 데이터베이스 연결
 			con = DBUtil.getConnection();
@@ -245,7 +307,6 @@ public class StudentDAO {
 			pstmt.setInt(1, s_Code);
 			// sql문을 수행후 처리결과를 얻어옴
 			int i = pstmt.executeUpdate();
-			
 
 			if (i == 1) {
 				Alert alert = new Alert(AlertType.INFORMATION);
@@ -259,15 +320,15 @@ public class StudentDAO {
 				alert.setHeaderText("학생 삭제 실패");
 				alert.setContentText("학생 삭제 실패!!");
 				alert.showAndWait();
-			
+
 			}
 		} catch (SQLException e) {
-			System.out.println("e=[" + e + "]");
-		
+			System.out.println("3e=[" + e + "]");
+			e.printStackTrace();
 
 		} catch (Exception e) {
-			System.out.println("e=[" + e + "]");
-			
+			System.out.println("4e=[" + e + "]");
+
 		} finally {
 			try {
 				// 데이터 베이스와의 연결에 사용되었던 오브젝트를 해제
@@ -276,10 +337,10 @@ public class StudentDAO {
 				if (con != null)
 					con.close();
 			} catch (SQLException e) {
-				
+
 			}
 		}
-	
+
 	}
 
 }
