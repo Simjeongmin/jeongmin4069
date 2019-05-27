@@ -39,12 +39,13 @@ public class OutputTabController implements Initializable {
 	private Button btnSaveFileDir;// 저장폴더
 	@FXML
 	private TextField txtSaveFileDir;// 파일경로
-	/*
-	 * @FXML private TextField txtSearch;// 검색이름
-	 */	@FXML
+	@FXML
+	private TextField txtSearch;// 검색이름
+
+	@FXML
 	private TableView<EnrollmentTabVO> tableView = new TableView<EnrollmentTabVO>();// 출석부 테이불 뷰
 
-	ObservableList<EnrollmentTabVO> data = FXCollections.observableArrayList();
+	ObservableList<EnrollmentTabVO> data = FXCollections.observableArrayList(); // 데이터
 	private Stage primaryStage;
 	ObservableList<EnrollmentTabVO> selectStudent;// 테이블에서 선택한 정보 저장
 
@@ -59,7 +60,7 @@ public class OutputTabController implements Initializable {
 		btnExcel.setOnAction(event -> handlerBtnExcelFileAction(event));// 엑셀파일생성
 		btnSaveFileDir.setOnAction(event -> handlerBtnSaveFileDirAction(event));// 파일 저장 폴더
 		btnDelete.setOnAction(event -> handlerBtnDeleteAction(event));// 삭제버튼
-		//btnSearch.setOnAction(event -> handlerBtnSearchAction(event));// 검색
+		btnSearch.setOnAction(event -> handlerBtnSearchAction(event));// 검색
 
 		tableView.setEditable(false);// 테이블뷰 수정금지
 		tableView.setOnMouseClicked(event -> handlerBtnPieChartAction(event));// 테이블에 선택한 정보 저장
@@ -101,26 +102,70 @@ public class OutputTabController implements Initializable {
 
 	}
 
-	/*
-	 * // 검색 public void handlerBtnSearchAction(ActionEvent event) {
-	 * ArrayList<EnrollmentTabVO> searchList = new ArrayList<EnrollmentTabVO>();
-	 * EnrollmentTabVO eVo = null; EnrollmentTabDAO eDao = null; String searchName =
-	 * ""; boolean searchResult = false; try { searchName =
-	 * txtSearch.getText().trim(); eDao = new EnrollmentTabDAO(); searchList =
-	 * eDao.getStudentCheck(searchName); if (searchName.equals("")) { searchResult =
-	 * true; Alert alert = new Alert(AlertType.WARNING); alert.setTitle("학생 정보 검색");
-	 * alert.setHeaderText("학생의 이름  입력 하시오"); alert.setContentText("다음에 주의 하세요");
-	 * alert.showAndWait(); } if (searchList != null) { int rowCount =
-	 * searchList.size(); txtSearch.clear(); data.removeAll(data); for (int index =
-	 * 0; index < rowCount; index++) { eVo = searchList.get(index); data.add(eVo);
-	 * searchResult = true; } } if (!searchResult) { txtSearch.clear(); Alert alert
-	 * = new Alert(AlertType.INFORMATION); alert.setTitle("학생 정보 검색");
-	 * alert.setHeaderText(searchName + " 학생이 리스트에 없습니다");
-	 * alert.setContentText("다음에 주의 하세요"); alert.showAndWait(); } } catch (Exception
-	 * e) { e.printStackTrace(); Alert alert = new Alert(AlertType.ERROR);
-	 * alert.setTitle("학생 정보 검색  오류"); alert.setHeaderText("학생 검색 오류 발생");
-	 * alert.setContentText("다시 하세요"); alert.showAndWait(); } }
-	 */
+	// 검색
+	public void handlerBtnSearchAction(ActionEvent event) {
+		EnrollmentTabVO eVo = new EnrollmentTabVO();
+		EnrollmentTabDAO eDao = null;
+
+		Object[][] totalData = null;
+		String searchName = "";
+		boolean searchResult = false;
+
+		try {
+			searchName = txtSearch.getText().trim();// 데이터 집어 넣기
+			eDao = new EnrollmentTabDAO();
+			eVo = eDao.getStudentCheck(searchName);// 입력한데이터 dao 에서 확인
+
+			// 검색칸 공백 확인
+			if (searchName.equals("")) {
+				searchResult = true;
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("학생 정보 검색");
+				alert.setHeaderText("학생 이름을 입력 하시오");
+				alert.setContentText("다음에 주의 하세요");
+				alert.showAndWait();
+			}
+			// 검색칸 공백아닌경우
+			if (!searchName.equals("") && (eVo != null)) {
+				ArrayList<String> title;
+				ArrayList<EnrollmentTabVO> list;
+				title = eDao.getColumns_Name();// 학생 테이블 갯수 넣기
+				int columnCount = title.size();// 데이터 넣기
+
+				list = eDao.getTotal();//학생 전체 데이터 넣기
+				int rowCount = list.size();//학생 갯수 넣기
+
+				totalData = new Object[rowCount][columnCount]; //배열사용
+
+				if (eVo.getS_name().equals(searchName)) {
+					txtSearch.clear();
+					data.removeAll(data);
+					for (int index = 0; index < rowCount; index++) {
+						System.out.println(index);
+						eVo = list.get(index);
+						if (eVo.getS_name().equals(searchName)) {
+							data.add(eVo);
+							searchResult = true;
+						}
+					}
+				}
+			}
+			if (!searchResult) {
+				txtSearch.clear();
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("학생 검색");
+				alert.setHeaderText(searchName + " 학생이 없습니다");
+				alert.setContentText("다시 검색 하세요");
+				alert.showAndWait();
+			}
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("학생 검색 오류");
+			alert.setHeaderText("학생 검색 중 오류 발생 ");
+			alert.setContentText("다시 검색 하세요");
+			alert.showAndWait();
+		}
+	}
 
 	// 새로고침
 	public void handlerBtnListAction(ActionEvent event) {
@@ -145,7 +190,7 @@ public class OutputTabController implements Initializable {
 				System.out.println(no);
 			}
 		} catch (Exception e) {
-			Alert alert = new Alert(AlertType.WARNING);
+			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("학생 선택");
 			alert.setHeaderText("선택한 학생이 없습니다");
 			alert.setContentText("학생을 추가한후 선택하세요");
@@ -212,12 +257,12 @@ public class OutputTabController implements Initializable {
 		EnrollmentTabVO eVo = null;
 		ArrayList<String> title;
 		ArrayList<EnrollmentTabVO> list;
-		title = eDao.getColumns_Name();// getColumns_Name,getColumnName
+		title = eDao.getColumns_Name();
 		int columnCount = title.size();
-		list = eDao.getTotal();// getTotal,getStudentTotal
+		list = eDao.getTotal();// 학생등록 출석부 등록된 학생만 검색 해서 출력
 		int rowCount = list.size();
 		totalData = new Object[rowCount][columnCount];
-		
+
 		for (int index = 0; index < rowCount; index++) {
 			eVo = list.get(index);
 			data.add(eVo);

@@ -17,33 +17,6 @@ import oracle.net.aso.e;
 
 public class EnrollmentTabDAO {
 
-	/*
-	 * // 학생정보 public EnrollmentTabVO getStudent() throws Exception { String sql =
-	 * "select s.S_code,s.S_name,s.S_year,s.S_ban,s.S_number,a.a_come,a.a_day from student s,attendane a order by s.S_code desc"
-	 * ;
-	 * 
-	 * Connection con = null; PreparedStatement pstmt = null; ResultSet rs = null;
-	 * EnrollmentTabVO studentinfo = null; try { con = DBUtil.getConnection(); pstmt
-	 * = con.prepareStatement(sql); rs = pstmt.executeQuery(); while (rs.next()) {
-	 * studentinfo = new EnrollmentTabVO();
-	 * studentinfo.setS_code(rs.getInt("S_code"));
-	 * studentinfo.setS_name(rs.getString("S_name"));
-	 * studentinfo.setS_year(rs.getInt("S_year"));
-	 * studentinfo.setS_ban(rs.getInt("S_ban"));
-	 * studentinfo.setS_number(rs.getInt("S_number"));
-	 * studentinfo.setA_come(rs.getString("A_come"));
-	 * studentinfo.setA_day(rs.getString("A_day"));
-	 * 
-	 * } } catch (SQLException se) { System.out.println("오류나는곳");
-	 * se.printStackTrace();
-	 * 
-	 * } catch (Exception e) { System.out.println(e); } finally { try { if (rs !=
-	 * null) rs.close(); if (pstmt != null) pstmt.close(); if (con != null)
-	 * con.close(); } catch (SQLException se) {
-	 * 
-	 * } } return studentinfo; }
-	 */
-
 	// 데이터베이스에서 학생 테이블의 컬럼갯수
 	public ArrayList<String> getColumns_Name() {
 		ArrayList<String> columns_Name = new ArrayList<String>();
@@ -287,29 +260,39 @@ public class EnrollmentTabDAO {
 			alert.showAndWait();
 
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 
 	}
-	
-	//검색
-	public EnrollmentTabVO getStudentCheck(String name) throws Exception {
-		String dml = "select * from student where S_name like ?";
+
+	// 검색
+	public EnrollmentTabVO getStudentCheck(String S_name) throws Exception {
+
+		String dml = "select * from student,attendane where S_name like ?";
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		EnrollmentTabVO eVO = null;
+		EnrollmentTabVO eVo = null;
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(dml);
-			pstmt.setString(1, name);
+			pstmt.setString(1, "%" + S_name + "%"); // 학생 이름
 			rs = pstmt.executeQuery();
+
 			if (rs.next()) {
-				eVO = new EnrollmentTabVO(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
-						rs.getString(6));
+				eVo = new EnrollmentTabVO();
+				eVo.setS_code(rs.getInt("S_code"));
+				eVo.setS_name(rs.getString("S_name"));
+				eVo.setS_year(rs.getInt("S_year"));
+				eVo.setS_ban(rs.getInt("S_ban"));
+				eVo.setS_number(rs.getInt("S_number"));
+				eVo.setA_come(rs.getString("A_come"));
+				eVo.setA_day(rs.getString("A_day"));
+
 			}
 		} catch (SQLException e) {
+			System.out.println("1 " + e);
 		} catch (Exception e) {
+			System.out.println("2" + e);
 		} finally {
 			try {
 				if (rs != null)
@@ -319,10 +302,9 @@ public class EnrollmentTabDAO {
 				if (con != null)
 					con.close();
 			} catch (SQLException e2) {
-				// TODO: handle exception
 			}
 		}
-		return eVO;
+		return eVo;
 
 	}
 
