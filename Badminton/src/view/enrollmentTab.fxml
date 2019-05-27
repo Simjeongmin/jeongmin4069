@@ -34,12 +34,12 @@
 				</children>
 			</HBox>
 			<TableView fx:id="tableView" prefHeight="300"
-				prefWidth="500">
+				prefWidth="500" translateY="10">
 			</TableView>
 			<HBox>
-				<Button fx:id="btnReset">초기화</Button>
-				<Button fx:id="btnCheck" translateY="130" translateX="180">등 록</Button>
-				<Button fx:id="btnExit" translateY="130" translateX="182">종 료</Button>
+				<Button fx:id="btnReset" translateY="130" translateX="168">초기화</Button>
+				<Button fx:id="btnCheck" translateY="130" translateX="169">등 록</Button>
+				<Button fx:id="btnExit" translateY="130" translateX="170">종 료</Button>
 			</HBox>
 		</VBox>
 
@@ -48,7 +48,7 @@
 		<ToggleGroup fx:id="choiceGroup" />
 	</fx:define>
 	<children>
-		<Label  fx:id="lblCount" text="" layoutY="430" layoutX="190"/>
+		<Label fx:id="lblCount" text="" layoutY="430" layoutX="190" />
 		<Label fx:id="lblCount" text="" layoutY="400" layoutX="210" />
 		<Label text="선택: " layoutY="430" layoutX="170" />
 		<RadioButton fx:id="rbAttendance" userData="출석" text="출석"

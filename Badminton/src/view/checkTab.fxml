@@ -43,7 +43,7 @@ fx:controller="controller.CheckTabController" prefHeight="1000" prefWidth="1000"
 					<Insets top="5" right="10" bottom="5" left="10"/>
 				</padding>
 				<Label text="수업 내용:"/>
-				<TextField fx:id="txtContent"  prefWidth="200"/>
+				<TextField fx:id="txtContent"  prefWidth="200" promptText="최대 30자 입력"/>
 			</HBox>
 			<TableView fx:id="tableView" prefHeight="450" prefWidth="450">
 			</TableView>

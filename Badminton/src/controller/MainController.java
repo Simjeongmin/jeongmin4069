@@ -152,7 +152,7 @@ public class MainController implements Initializable {
 		btnDelete.setDisable(false);// 삭제 활성
 		btnImageFile.setDisable(false);// 이미지 등록 버튼 사용 활성
 
-		// 학년 반 출석번호에는 숫자만 입력
+		// 학년, 반, 출석번호 ,시간에는 숫자만 입력
 		DecimalFormat format = new DecimalFormat("###");
 		// 학년
 		txtYear.setTextFormatter(new TextFormatter<>(event -> {
@@ -197,6 +197,22 @@ public class MainController implements Initializable {
 
 			}
 		}));
+		//시간은 한자리로 설정
+		txtTime.setTextFormatter(new TextFormatter<>(event -> {
+			if (event.getControlNewText().isEmpty()) {
+				return event;
+			}
+			ParsePosition parsePosition = new ParsePosition(0);
+			Object object = format.parse(event.getControlNewText(), parsePosition);
+			if (object == null || parsePosition.getIndex() < event.getControlNewText().length()
+					|| event.getControlNewText().length() == 2) {
+				return null;
+			} else {
+				return event;
+
+			}
+		}));
+		
 
 		// 테이블 뷰 수정금지!
 		tableView.setEditable(false);
@@ -219,7 +235,7 @@ public class MainController implements Initializable {
 		cols_Ban.setCellValueFactory(new PropertyValueFactory<>("S_ban"));
 
 		TableColumn cols_Number = new TableColumn("출석번호");
-		cols_Number.setMaxWidth(40);
+		cols_Number.setMaxWidth(70);
 		cols_Number.setCellValueFactory(new PropertyValueFactory<>("S_number"));
 
 		TableColumn cols_Gender = new TableColumn("성별");
@@ -522,6 +538,7 @@ public class MainController implements Initializable {
 							Integer.parseInt(txts_time.getText().trim()), txts_experience.getText(),
 							txts_level.getText(), txts_startdate.getText(), txts_enddate.getText(),
 							txts_email.getText());
+					
 
 					sDao = new StudentDAO();
 					sDao.getStudentUpdate(sVo, sVo.getS_code());
@@ -544,10 +561,11 @@ public class MainController implements Initializable {
 			});
 			// 수정창의 버튼 취소
 			btnFormCancel.setOnAction(e -> {
+				handlerBtnInitAction(event);
 				btnDelete.setDisable(true);
 				btnEdit.setDisable(false);
 				dialog.close();
-				handlerBtnInitAction(event);
+				
 
 				// 기본 이미지
 				localUrl = "/image/default.png";

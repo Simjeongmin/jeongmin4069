@@ -20,10 +20,10 @@
 	<Button fx:id="btnday10" layoutX="140" layoutY="290" text="10일" prefHeight="100" prefWidth="100"/>
 	<Button fx:id="btnday11" layoutX="260" layoutY="290" text="11일" prefHeight="100" prefWidth="100"/>
 	<Button fx:id="btnday12" layoutX="380" layoutY="290" text="12일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday13" layoutX="20" layoutY="410" text="12일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday14" layoutX="140" layoutY="410" text="12일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday15" layoutX="260" layoutY="410" text="12일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday16" layoutX="380" layoutY="410" text="12일" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday13" layoutX="20" layoutY="410" text="13일" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday14" layoutX="140" layoutY="410" text="14일" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday15" layoutX="260" layoutY="410" text="15일" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday16" layoutX="380" layoutY="410" text="16일" prefHeight="100" prefWidth="100"/>
 	</children>
 	
 </AnchorPane>

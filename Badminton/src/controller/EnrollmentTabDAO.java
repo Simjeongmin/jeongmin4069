@@ -17,49 +17,32 @@ import oracle.net.aso.e;
 
 public class EnrollmentTabDAO {
 
-	// 학생정보
-	public EnrollmentTabVO getStudent() throws Exception {
-		String sql = "select s.S_code,s.S_name,s.S_year,s.S_ban,s.S_number,a.a_come,a.a_day from student s,attendane a order by s.S_code desc";
-
-		Connection con = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		EnrollmentTabVO studentinfo = null;
-		try {
-			con = DBUtil.getConnection();
-			pstmt = con.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			while (rs.next()) {
-				studentinfo = new EnrollmentTabVO();
-				studentinfo.setS_code(rs.getInt("S_code"));
-				studentinfo.setS_name(rs.getString("S_name"));
-				studentinfo.setS_year(rs.getInt("S_year"));
-				studentinfo.setS_ban(rs.getInt("S_ban"));
-				studentinfo.setS_number(rs.getInt("S_number"));
-				studentinfo.setA_come(rs.getString("A_come"));
-				studentinfo.setA_day(rs.getString("A_day"));
-
-			}
-		} catch (SQLException se) {
-			System.out.println("오류나는곳");
-			se.printStackTrace();
-
-		} catch (Exception e) {
-			System.out.println(e);
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (con != null)
-					con.close();
-			} catch (SQLException se) {
-
-			}
-		}
-		return studentinfo;
-	}
+	/*
+	 * // 학생정보 public EnrollmentTabVO getStudent() throws Exception { String sql =
+	 * "select s.S_code,s.S_name,s.S_year,s.S_ban,s.S_number,a.a_come,a.a_day from student s,attendane a order by s.S_code desc"
+	 * ;
+	 * 
+	 * Connection con = null; PreparedStatement pstmt = null; ResultSet rs = null;
+	 * EnrollmentTabVO studentinfo = null; try { con = DBUtil.getConnection(); pstmt
+	 * = con.prepareStatement(sql); rs = pstmt.executeQuery(); while (rs.next()) {
+	 * studentinfo = new EnrollmentTabVO();
+	 * studentinfo.setS_code(rs.getInt("S_code"));
+	 * studentinfo.setS_name(rs.getString("S_name"));
+	 * studentinfo.setS_year(rs.getInt("S_year"));
+	 * studentinfo.setS_ban(rs.getInt("S_ban"));
+	 * studentinfo.setS_number(rs.getInt("S_number"));
+	 * studentinfo.setA_come(rs.getString("A_come"));
+	 * studentinfo.setA_day(rs.getString("A_day"));
+	 * 
+	 * } } catch (SQLException se) { System.out.println("오류나는곳");
+	 * se.printStackTrace();
+	 * 
+	 * } catch (Exception e) { System.out.println(e); } finally { try { if (rs !=
+	 * null) rs.close(); if (pstmt != null) pstmt.close(); if (con != null)
+	 * con.close(); } catch (SQLException se) {
+	 * 
+	 * } } return studentinfo; }
+	 */
 
 	// 데이터베이스에서 학생 테이블의 컬럼갯수
 	public ArrayList<String> getColumns_Name() {
@@ -103,30 +86,29 @@ public class EnrollmentTabDAO {
 
 	// 출석부 등록
 	public void setStudentAttendance(EnrollmentTabVO avo) throws Exception {
+
 		String sql = "insert into attendane (a_no,a_come,a_day,s_code) values "
-				+ "(attendane_seq.nextval,?,sysdate,?) ";
-		// String sql = "update attendane set a_come=? where S_code =?";
+				+ "(attendane_seq.nextval,?,sysdate,?) ";// 출석여부는 라디오 버튼 등록:학생 코드로 구분 해서 등록한다
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
-
-			System.out.println(avo.getS_code());
-
-			pstmt.setString(1, avo.getA_come());
-			pstmt.setInt(2, avo.getS_code());
+			pstmt.setString(1, avo.getA_come());// 출석 여부 불러오기
+			pstmt.setInt(2, avo.getS_code()); // 등록할 학생 코드 불러오기
 
 			int i = pstmt.executeUpdate();
 
 			if (i == 1) {
+				// 참인경우
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("출석부 등록");
 				alert.setHeaderText("등록 성공 완료");
 				alert.setContentText("등록 성공");
 				alert.showAndWait();
 			} else {
+				// 거짓인경우
 				Alert alert = new Alert(AlertType.ERROR);
 				alert.setTitle("출석부 등록");
 				alert.setHeaderText("등록 실패 완료");
@@ -134,13 +116,14 @@ public class EnrollmentTabDAO {
 				alert.showAndWait();
 			}
 		} catch (SQLException e) {
+			// 출석부 학생 데이터 제거 안한경우
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("출석부 등록");
 			alert.setHeaderText("학생을 선택 하세요");
 			alert.setContentText("오류 발생");
 			alert.showAndWait();
-			// System.err.println("오류발생: " + e);
 		} catch (Exception e) {
+			// 그밖에
 			System.out.println(e);
 		} finally {
 			try {
@@ -158,6 +141,7 @@ public class EnrollmentTabDAO {
 	public ArrayList<EnrollmentTabVO> getTotal() {
 		ArrayList<EnrollmentTabVO> list = new ArrayList<EnrollmentTabVO>();
 		StringBuffer sql = new StringBuffer();
+		// 학생 리스트를 불러오기 조건으로 학생테이블 코드와 출석부 학생 코드 가 동일한것만
 		sql.append(
 				"select s.S_code, a.A_no ,s.S_name, s.S_year, s.S_ban, s.S_number,a.a_come,a.a_day from student s,attendane a where s.S_code=a.S_code");
 
@@ -204,9 +188,10 @@ public class EnrollmentTabDAO {
 
 	}
 
-	// 학생삭제
+	// 출석부학생삭제
 	public void getStudentDelete(int no) throws Exception {
 
+		// 출석부 테이블에 학생을 선택해서 삭제한다
 		StringBuffer sql = new StringBuffer();
 		sql.append("delete from attendane where a_no = ?");
 
@@ -218,7 +203,7 @@ public class EnrollmentTabDAO {
 
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.toString());
-			pstmt.setInt(1, no);
+			pstmt.setInt(1, no); // 출석부 코드 불러오기
 
 			int i = pstmt.executeUpdate();
 
@@ -254,53 +239,9 @@ public class EnrollmentTabDAO {
 
 	}
 
-	/*
-	 * // 검색 public ArrayList<EnrollmentTabVO> getStudentCheck(String s_name) throws
-	 * Exception { ArrayList<EnrollmentTabVO> list = new
-	 * ArrayList<EnrollmentTabVO>();
-	 * 
-	 * String sql = "select * from student s,attendane a where s.S_name like ? ";
-	 * 
-	 * Connection con = null; PreparedStatement pstmt = null; ResultSet rs = null;
-	 * EnrollmentTabVO eVo = null; try { con = DBUtil.getConnection(); pstmt =
-	 * con.prepareStatement(sql); pstmt.setString(1, "%" + s_name + "%");
-	 * 
-	 * rs = pstmt.executeQuery();
-	 * 
-	 * while (rs.next()) { eVo = new EnrollmentTabVO();
-	 * eVo.setS_code(rs.getInt("S_code")); eVo.setS_name(rs.getString("S_name"));
-	 * eVo.setS_year(rs.getInt("S_year")); eVo.setS_ban(rs.getInt("S_ban"));
-	 * eVo.setS_number(rs.getInt("S_number"));
-	 * eVo.setA_come(rs.getString("A_come")); eVo.setA_day(rs.getString("A_day"));
-	 * 
-	 * list.add(eVo); } } catch (SQLException e) { System.out.println(e); } catch
-	 * (Exception e) { System.out.println(e); } finally { try { if (rs != null)
-	 * rs.close();
-	 * 
-	 * if (pstmt != null) pstmt.close();
-	 * 
-	 * if (con != null) con.close(); } catch (SQLException e2) { } } return list; }
-	 */
-
-	/*
-	 * // 중복확인 public boolean getOverlap(int no) throws Exception {
-	 * 
-	 * String sql =
-	 * "select * from student where s_code in (select s_code from attendane where a_day= a_day)"
-	 * ; Connection con = null; PreparedStatement pstmt = null; ResultSet rs = null;
-	 * boolean overlap1 = false; EnrollmentTabVO eVo = null;
-	 * 
-	 * try { con = DBUtil.getConnection(); pstmt = con.prepareStatement(sql);
-	 * pstmt.setInt(1, no); rs = pstmt.executeQuery(); if (rs.next()) { overlap1 =
-	 * true; } } catch (SQLException e) { System.out.println("e=[" + e + "]"); }
-	 * catch (Exception e) { System.out.println("e=[" + e + "]"); } finally { try {
-	 * // 데이터베이스와 연결에 사용되었던 오브젝트를 해제 if (rs != null) rs.close(); if (pstmt != null)
-	 * pstmt.close(); if (con != null) con.close(); } catch (SQLException e) { //
-	 * TODO: handle exception } } return overlap1; }
-	 */
-
 	// 학생 출석 여부 변경 0 -> 1
 	public void setStudentAttendanceChange(EnrollmentTabVO evo) {
+		// 업데이트 선택한 학생 코드로 구분
 		String sql = "update student set s_come = 1 where s_code = ?";
 
 		Connection con = null;
@@ -309,38 +250,80 @@ public class EnrollmentTabDAO {
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
-
-			System.out.println(evo.getS_come());
-
-			pstmt.setInt(1, evo.getS_code());
+			pstmt.setInt(1, evo.getS_code());// 학생 코드
 
 			int i = pstmt.executeUpdate();
 
 		} catch (Exception e) {
-			// TODO: handle exception
 		}
 
 	}
 
 	// 학생 출석 여부 변경 1-> 0
-	public void setStudentModification(EnrollmentTabVO evo) {
-		System.out.println("초기화");
+	public void setStudentReset() {
+		// 전체 학생 학생출석여부 0으로 변환
 		String sql = "update student set s_come = 0";
-
+		System.out.println(1111);
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
+			int i = pstmt.executeUpdate();
+			System.out.println(i);
+			if (i == 1) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setTitle("출석부  학생 초기화");
+				alert.setHeaderText("학생 초기화 실패");
+				alert.setContentText("학생 초기화 실패");
+				alert.showAndWait();
 
-			pstmt.setInt(1, evo.getS_come());
-
-			// int i = pstmt.executeUpdate();
+			}
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("출석부  학생 초기화");
+			alert.setHeaderText("학생 초기화 완료");
+			alert.setContentText("학생 초기화 성공");
+			alert.showAndWait();
 
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
 	}
+	
+	//검색
+	public EnrollmentTabVO getStudentCheck(String name) throws Exception {
+		String dml = "select * from student where S_name like ?";
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		EnrollmentTabVO eVO = null;
+		try {
+			con = DBUtil.getConnection();
+			pstmt = con.prepareStatement(dml);
+			pstmt.setString(1, name);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				eVO = new EnrollmentTabVO(rs.getString(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5),
+						rs.getString(6));
+			}
+		} catch (SQLException e) {
+		} catch (Exception e) {
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (con != null)
+					con.close();
+			} catch (SQLException e2) {
+				// TODO: handle exception
+			}
+		}
+		return eVO;
+
+	}
+
 }
