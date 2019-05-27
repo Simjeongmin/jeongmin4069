@@ -324,7 +324,8 @@ public class EnrollmentTabDAO {
 
 	// 학생 출석 여부 변경 1-> 0
 	public void setStudentModification(EnrollmentTabVO evo) {
-		String sql = "update student set s_come = 1 where s_come = s_come ";
+		System.out.println("초기화");
+		String sql = "update student set s_come = 0";
 
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -332,8 +333,6 @@ public class EnrollmentTabDAO {
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql);
-
-			System.out.println(evo.getS_come());
 
 			pstmt.setInt(1, evo.getS_come());
 
