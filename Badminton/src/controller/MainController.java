@@ -148,8 +148,8 @@ public class MainController implements Initializable {
 
 		btnInit.setDisable(false);// 초기화버튼 활성
 		btnRegister.setDisable(false); // 등록 활성
-		btnEdit.setDisable(false);// 수정 활성
-		btnDelete.setDisable(false);// 삭제 활성
+		btnEdit.setDisable(true);// 수정 비활성
+		btnDelete.setDisable(true);// 삭제 비활성
 		btnImageFile.setDisable(false);// 이미지 등록 버튼 사용 활성
 
 		// 학년, 반, 출석번호 ,시간에는 숫자만 입력
@@ -197,7 +197,7 @@ public class MainController implements Initializable {
 
 			}
 		}));
-		//시간은 한자리로 설정
+		// 시간은 한자리로 설정
 		txtTime.setTextFormatter(new TextFormatter<>(event -> {
 			if (event.getControlNewText().isEmpty()) {
 				return event;
@@ -212,7 +212,6 @@ public class MainController implements Initializable {
 
 			}
 		}));
-		
 
 		// 테이블 뷰 수정금지!
 		tableView.setEditable(false);
@@ -300,15 +299,28 @@ public class MainController implements Initializable {
 			try {
 
 				data.removeAll(data);
-				StudentVO svo = null;
-				StudentDAO sdao = new StudentDAO();
-				File dirMake = new File(dirSave.getAbsolutePath());
+				StudentVO svo = null;// null로 선언
+				StudentDAO sdao = new StudentDAO();// sdao객체 생성
+				File dirMake = new File(dirSave.getAbsolutePath());// dirMake 객체 생성
 				// 이미지 저장 폴더 생성
 				if (!dirMake.exists()) {
 					dirMake.mkdir();
 				}
+
+				// 입력안되면 오류
+				if (txtName.getText().trim().equals("") || txtYear.getText().trim().equals("")
+						|| txtBan.getText().trim().equals("") || txtNumber.getText().trim().equals("")
+						|| txtPhone.getText().trim().equals("") || txtEmergency.getText().trim().equals("")
+						|| txtTime.getText().trim().equals("") || txtExperience.getText().trim().equals("")
+						|| txtStartdate.getText().trim().equals("") || txtEnddate.getText().trim().equals("")
+						|| txtEmail.getText().trim().equals(""))
+					;
+
 				// 이미지 파일 저장
 				String s_image = imageSave(selectedFile);
+				if (s_image.equals(""))
+					;// 이미지 안넣었으면 오류
+				// 등록버튼 누르면 입력했던값이 studentVo에있는 get으로 읽어옴.
 				if (event.getSource().equals(btnRegister)) {
 					svo = new StudentVO(txtName.getText(), Integer.parseInt(txtYear.getText().trim()),
 							Integer.parseInt(txtBan.getText().trim()), Integer.parseInt(txtNumber.getText().trim()),
@@ -318,10 +330,10 @@ public class MainController implements Initializable {
 							LevelGroup.getSelectedToggle().getUserData().toString(), txtStartdate.getText(),
 							txtEnddate.getText(), txtEmail.getText(), s_image);
 
-					sdao = new StudentDAO();
-					sdao.getStudentregiste(svo);
-					//s_Code = selectStudent.get(0).getS_code();
-					if (sdao != null) {
+					sdao = new StudentDAO();// sdao 인스턴스화
+					sdao.getStudentregiste(svo);// sdao에서 학생등록한값을 가져옴
+
+					if (sdao != null) {	
 						totalList();
 						Alert alert = new Alert(AlertType.INFORMATION);
 						alert.setTitle("점수 입력");
@@ -329,13 +341,13 @@ public class MainController implements Initializable {
 						alert.setContentText(txtName.getText() + "학생의 점수가 성공적으로 추가되었습니다.");
 						alert.showAndWait();
 
-						btnImageFile.setDisable(false);
+						btnImageFile.setDisable(false);// 버튼이미지 활성화
 
 						// 기본 이미지
 						localUrl = "/image/default.png";
 						localimage = new Image(localUrl, false);
 						imageView.setImage(localimage);
-
+						// 수정x
 						txtName.setEditable(true);
 						txtYear.setEditable(true);
 						txtBan.setEditable(true);
@@ -350,8 +362,10 @@ public class MainController implements Initializable {
 					}
 				}
 
-			} catch (Exception e) {
-				
+			}
+			// 정보 입력에서 실패할때
+			catch (Exception e) {
+				//알림
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("학생 정보 입력");
 				alert.setHeaderText("주의합시다");
@@ -405,21 +419,24 @@ public class MainController implements Initializable {
 		lblSubjectName.setText(LoginController.subjectName);// 담당 과목
 		tableView.setOnMouseClicked(event -> handlerBtnPieChartAction(event));// 테이블의 학생선택
 	}
-
+//마우스 액션 이벤트 설정
 	public void handlerBtnPieChartAction(MouseEvent event) {
 		// 마우스 왼쪽 더블 클릭이면 2를 반환
 		// 마우스 왼쪽 클릭이면 수정 삭제
 		if (event.getClickCount() != 2) {
 			try {
-				selectStudent = tableView.getSelectionModel().getSelectedItems();
-				s_Code = selectStudent.get(0).getS_code();
-				selectFileName = selectStudent.get(0).getS_image();
-				localUrl = "file:/D:/images/" + selectFileName;
+				selectStudent = tableView.getSelectionModel().getSelectedItems();//테이블뷰에 있는 여러항목중에 하나를 선택한다. 
+				s_Code = selectStudent.get(0).getS_code();//s_code로 등록된 학생 데이터를 표시
+				selectFileName = selectStudent.get(0).getS_image();//s_image로 등록된 FileName을 표시
+				localUrl = "file:/D:/images/" + selectFileName;// D드라이버에있는 images(파일)에 등록된 Filename 주소
 				localimage = new Image(localUrl, false);
 
-				imageView.setImage(localimage);
-				imageView.setFitHeight(250);
-				imageView.setFitWidth(230);
+				imageView.setImage(localimage);//이미지 로드
+				imageView.setFitHeight(250);//이미지 가로
+				imageView.setFitWidth(230);//이미지 세로
+				
+				btnEdit.setDisable(false);
+				btnDelete.setDisable(false);
 			} catch (Exception e) {
 				Alert alert = new Alert(AlertType.WARNING);
 				alert.setTitle("학생 선택");
@@ -433,10 +450,10 @@ public class MainController implements Initializable {
 
 // 학생 삭제
 	public void handlerBtnDeleteAction(ActionEvent event) {
-		StudentDAO sDao = null;
-		sDao = new StudentDAO();
+		StudentDAO sDao = null;//sDao null로 선언
+		sDao = new StudentDAO(); //sDao 인스턴스화
 		try {
-			sDao.getStudentDelete(s_Code);
+			sDao.getStudentDelete(s_Code);//sDao의 s_code로 등록된 학생을 지운다.
 			data.removeAll(data);
 			// 학생 전체 정보
 			totalList();
@@ -450,18 +467,19 @@ public class MainController implements Initializable {
 //수정버튼 이벤트 핸들러
 	public void handlerBtnEditAction(ActionEvent event) {
 		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/view/formedit.fxml"));
-
+			FXMLLoader loader = new FXMLLoader();//loader라는 객체 생성
+			loader.setLocation(getClass().getResource("/view/formedit.fxml"));//수정창이 띄어진다.
+			//창을 위에 포개져서 하나 더 띠운다.
 			Stage dialog = new Stage(StageStyle.UTILITY);
 			dialog.initModality(Modality.WINDOW_MODAL);
 			dialog.initOwner(btnRegister.getScene().getWindow());
 			dialog.setTitle("수정");
 
-			Parent parentEdit = (Parent) loader.load();
-			StudentVO studentEdit = tableView.getSelectionModel().getSelectedItem();
-			selectedIndex = tableView.getSelectionModel().getSelectedIndex();
-
+			Parent parentEdit = (Parent) loader.load();//parentEdit를 로드한다
+			StudentVO studentEdit = tableView.getSelectionModel().getSelectedItem();//테이블뷰에 있는 여러항목중에 하나를 선택한다. 
+			selectedIndex = tableView.getSelectionModel().getSelectedIndex(); //테이블뷰에 저장된 index번호로 여러 index번호중에 하나를 선택함.
+			
+			//수정창의 텍스트 필드설정
 			TextField editno = (TextField) parentEdit.lookup("#txts_code");
 			TextField editname = (TextField) parentEdit.lookup("#txts_name");
 			TextField edityear = (TextField) parentEdit.lookup("#txts_year");
@@ -489,7 +507,8 @@ public class MainController implements Initializable {
 			editstartdate.setDisable(true);
 			editenddate.setDisable(true);
 			editemail.setDisable(true);
-
+			
+			//수정값을 입력하기위해 설정
 			editno.setText(studentEdit.getS_code() + "");
 			editname.setText(studentEdit.getS_name());
 			edityear.setText(studentEdit.getS_year() + "");
@@ -505,13 +524,16 @@ public class MainController implements Initializable {
 			editstartdate.setText(studentEdit.getS_startdate());
 			editenddate.setText(studentEdit.getS_enddate());
 			editemail.setText(studentEdit.getS_email());
-
+			
+			//버튼설정
 			Button btnFormAdd = (Button) parentEdit.lookup("#btnFormAdd");
 			Button btnFormCancel = (Button) parentEdit.lookup("#btnFormCancel");
-
+			
+			//수정창의 저장 버튼
 			btnFormAdd.setOnAction(e -> {
-				StudentVO sVo = null;
-				StudentDAO sDao = null;
+				StudentVO sVo = null; //sVo null로 선언
+				StudentDAO sDao = null;//sDao null로 선언
+				//TextField설정
 				TextField txts_code = (TextField) parentEdit.lookup("#txts_code");
 				TextField txts_name = (TextField) parentEdit.lookup("#txts_name");
 				TextField txts_year = (TextField) parentEdit.lookup("#txts_year");
@@ -529,7 +551,7 @@ public class MainController implements Initializable {
 				TextField txts_email = (TextField) parentEdit.lookup("#txts_email");
 
 				data.remove(selectedIndex);
-
+				//수정한값을 저장함
 				try {
 					sVo = new StudentVO(Integer.parseInt(txts_code.getText()), txts_name.getText(),
 							Integer.parseInt(txts_year.getText().trim()), Integer.parseInt(txts_ban.getText().trim()),
@@ -538,10 +560,9 @@ public class MainController implements Initializable {
 							Integer.parseInt(txts_time.getText().trim()), txts_experience.getText(),
 							txts_level.getText(), txts_startdate.getText(), txts_enddate.getText(),
 							txts_email.getText());
-					
 
-					sDao = new StudentDAO();
-					sDao.getStudentUpdate(sVo, sVo.getS_code());
+					sDao = new StudentDAO();//sdao인스턴스화
+					sDao.getStudentUpdate(sVo, sVo.getS_code());//sdao수정한값을 저장함
 					data.removeAll(data);
 					totalList();
 					dialog.close();
@@ -549,8 +570,9 @@ public class MainController implements Initializable {
 					e1.printStackTrace();
 
 				}
-				btnDelete.setDisable(true);
-				btnEdit.setDisable(true);
+				// 버튼 활성화 시켜놓는다
+				btnDelete.setDisable(false);
+				btnEdit.setDisable(false);
 				handlerBtnInitAction(event);
 
 				// 기본이미지
@@ -565,13 +587,13 @@ public class MainController implements Initializable {
 				btnDelete.setDisable(true);
 				btnEdit.setDisable(false);
 				dialog.close();
-				
 
 				// 기본 이미지
 				localUrl = "/image/default.png";
 				localimage = new Image(localUrl, false);
 				imageView.setImage(localimage);
 			});
+			
 			Scene scene = new Scene(parentEdit);
 			dialog.setScene(scene);
 			dialog.setResizable(false);
@@ -584,7 +606,7 @@ public class MainController implements Initializable {
 
 //이미지 삭제 메소드
 	public boolean imageDelete(String s_image) {
-		boolean result = false;
+		boolean result = false; //result false로 선언
 		try {
 			File fileDelete = new File(dirSave.getAbsolutePath() + "\\" + s_image);// 삭제 이미지 파일
 
@@ -605,10 +627,10 @@ public class MainController implements Initializable {
 
 //이미지 저장 메소드
 	public String imageSave(File file) {
-		BufferedInputStream bis = null;
-		BufferedOutputStream bos = null;
+		BufferedInputStream bis = null; //bis null로 선언
+		BufferedOutputStream bos = null;//bos null로 선언
 
-		int data = -1;
+		int data = -1; //data를 -1로 선언
 		String s_image = null;
 		try {
 			// 이미지 파일 생성
@@ -638,7 +660,7 @@ public class MainController implements Initializable {
 
 // 학생 전체리스트
 	public void totalList() {
-		Object[][] totalData;
+		Object[][] totalData;//totalData 2차원 배열로 설정
 		StudentDAO sDao = new StudentDAO();
 		StudentVO sVo = null;
 		ArrayList<String> title;
@@ -647,7 +669,7 @@ public class MainController implements Initializable {
 		int columnCount = title.size();
 		list = sDao.getStudentTotal1();
 		int rowCount = list.size();
-		totalData = new Object[rowCount][columnCount];
+		totalData = new Object[rowCount][columnCount];// object 2차원 인스턴스화
 		for (int index = 0; index < rowCount; index++) {
 			sVo = list.get(index);
 			data.add(sVo);
@@ -779,8 +801,8 @@ public class MainController implements Initializable {
 
 // 이미지 선택 창
 	public void handlerBtnImageFileAction(ActionEvent event) {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image File", "*.png", "*.jpg", "*.gif"));
+		FileChooser fileChooser = new FileChooser(); //fileChooser 객체 생성
+		fileChooser.getExtensionFilters().addAll(new ExtensionFilter("Image File", "*.png", "*.jpg", "*.gif"));//확장자 설정
 
 		try {
 			selectedFile = fileChooser.showOpenDialog(primaryStage);
@@ -793,12 +815,12 @@ public class MainController implements Initializable {
 			e.printStackTrace();
 		}
 		localimage = new Image(localUrl, false);
-
+		//이미지 크기설정
 		imageView.setImage(localimage);
 		imageView.setFitHeight(250);
 		imageView.setFitWidth(230);
 
-		btnRegister.setDisable(false);
+		btnRegister.setDisable(false);//등록버튼 활성화시킴
 
 		if (selectedFile != null) {
 			selectFileName = selectedFile.getName();
@@ -809,6 +831,7 @@ public class MainController implements Initializable {
 	public void handlerBtnAttendanceActoion(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/adprintView.fxml"));
+			//출석부 view로 이동
 			Parent mainView = (Parent) loader.load();
 			Scene scane = new Scene(mainView);
 			Stage mainMtage = new Stage();
@@ -828,6 +851,7 @@ public class MainController implements Initializable {
 	public void handlerBtnEmalActoion(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/emailView.fxml"));
+			//이메일전송view로 이동
 			Parent mainView = (Parent) loader.load();
 			Scene scane = new Scene(mainView);
 			Stage mainMtage = new Stage();
@@ -845,6 +869,7 @@ public class MainController implements Initializable {
 	public void handlerBtnbadmintonplay(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/badmintonplay.fxml"));
+			//수업view로 이동
 			Parent mainView = (Parent) loader.load();
 			Scene scane = new Scene(mainView);
 			Stage mainMtage = new Stage();
@@ -876,6 +901,8 @@ public class MainController implements Initializable {
 		txtStartdate.clear();
 		txtEnddate.clear();
 		txtEmail.clear();
+		btnEdit.setDisable(true);// 수정 비활성
+		btnDelete.setDisable(true);// 삭제 비활성
 
 		// 기본 이미지
 		localUrl = "/image/default.png";
@@ -886,7 +913,7 @@ public class MainController implements Initializable {
 
 	// 메인창 종료
 	public void handlerBtnExitlActoion(ActionEvent event) {
-		Platform.exit();
+		Platform.exit();//프로그램이 꺼짐
 	}
 
 }

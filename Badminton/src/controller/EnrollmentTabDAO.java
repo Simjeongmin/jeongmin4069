@@ -116,7 +116,7 @@ public class EnrollmentTabDAO {
 		StringBuffer sql = new StringBuffer();
 		// 학생 리스트를 불러오기 조건으로 학생테이블 코드와 출석부 학생 코드 가 동일한것만
 		sql.append(
-				"select s.S_code, a.A_no ,s.S_name, s.S_year, s.S_ban, s.S_number,a.a_come,a.a_day from student s,attendane a where s.S_code=a.S_code");
+				"select s.S_code, a.A_no ,s.S_name, s.S_year, s.S_ban, s.S_number,a.a_come,a.a_day from student s,attendane a where s.S_code=a.S_code order by a.a_day desc");
 
 		Connection con = null;
 		PreparedStatement pstmt = null;

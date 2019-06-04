@@ -50,6 +50,7 @@ fx:controller="controller.CheckTabController" prefHeight="1000" prefWidth="1000"
 			<HBox alignment="CENTER">
 			<spacing>10</spacing>
 				<Button fx:id="btnCheck">등 록</Button>
+				<Button fx:id="btnDelete">삭 제</Button>
 				<Button fx:id="btnExit">종 료</Button>
 			</HBox>
 		</VBox>

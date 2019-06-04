@@ -53,7 +53,7 @@ public class LoginController implements Initializable {
 		}
 	}
 
-	// 패스원드 입력에서 Enter키 이벤트
+	// 패스워드 입력에서 Enter키 이벤트
 	public void handerTxtPasswordKeyPressed(KeyEvent event) {
 		if (event.getCode() == KeyCode.ENTER) {
 			login();
@@ -64,17 +64,19 @@ public class LoginController implements Initializable {
 	public void handerBtnJoinAction(ActionEvent event) {
 
 		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/joinView.fxml"));
-			Parent mainView = (Parent) loader.load();
-			Scene scane = new Scene(mainView);
-			Stage mainMtage = new Stage();
-			mainMtage.setTitle("관리 선생님 등록");
-			mainMtage.setScene(scane);
-			Stage oldStage = (Stage) btnLogin.getScene().getWindow();
-			oldStage.close();
-			mainMtage.show();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/joinView.fxml"));//선생님 등록창으로 이동
+			Parent mainView = (Parent) loader.load();//mainView
+			Scene scane = new Scene(mainView);//scane 객체 생성
+			Stage mainMtage = new Stage();//mainMtage 객체 생성
+			mainMtage.setTitle("관리 선생님 등록");//제목이 관리선생님인 등록 창으로 감
+			mainMtage.setScene(scane);//mainMtage를 보여준다.
+			Stage oldStage = (Stage) btnLogin.getScene().getWindow();//로그인버튼을 누르면 스테이지 이동
+			oldStage.close();//oldStage를 닫음
+			mainMtage.show();//mainMtage를 보여줌
+		} 
+		//실패 할때
+		catch (IOException e) {
+			
 			System.err.println("오류" + e);
 		}
 
@@ -92,20 +94,20 @@ public class LoginController implements Initializable {
 
 	// 로그인 메소드
 	public void login() {
-		LoginDAO login = new LoginDAO();
+		LoginDAO login = new LoginDAO();// login 객체 생성
 
-		boolean sucess = false;
+		boolean sucess = false; //sucess false로 선언
 
 		try {
 			teacherName = loginName(); // 담당선생님
-			subjectName = loginName1(); // 담당과목 명 변경할것
+			subjectName = loginName1(); // 담당과목명
 			// teacherName=txtId.getText();
-			sucess = login.getLogin(txtId.getText().trim(), txtPw.getText().trim());
-
+			sucess = login.getLogin(txtId.getText().trim(), txtPw.getText().trim());//텍스트 id 값과 텍스트 pw값을 얻어와서 로그인을 성공시킨다.
+			//실패할때 오류발생
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-
+		//알림창 로그인에 실패할때
 		Alert alert;
 		if (txtId.getText().equals("") || txtPw.getText().equals("")) {
 			alert = new Alert(AlertType.WARNING);
@@ -119,16 +121,16 @@ public class LoginController implements Initializable {
 		// 로그인 성공시 메인 페이지 이동
 		if (sucess) {
 			try {
-				FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/mainView.fxml"));
-				Parent mainView = (Parent) loader.load();
-				Scene scane = new Scene(mainView);
-				Stage mainMtage = new Stage();
-				mainMtage.setTitle("미래 방과후 중학생 관리");
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/mainView.fxml"));//로그인이 성공되면 메인(학생등록창으로) 이동
+				Parent mainView = (Parent) loader.load();// mainView
+				Scene scane = new Scene(mainView); //scane 객체 생성
+				Stage mainMtage = new Stage();//mainMtage 객체 생성
+				mainMtage.setTitle("미래 방과후 중학생 관리"); 
 				mainMtage.setResizable(false);
 				mainMtage.setScene(scane);
-				Stage oldStage = (Stage) btnLogin.getScene().getWindow();
-				oldStage.close();
-				mainMtage.show();
+				Stage oldStage = (Stage) btnLogin.getScene().getWindow();//로그인 버튼 누르면 스테이지 이동
+				oldStage.close();//oldStage를 닫음
+				mainMtage.show();//mainMtage를 보여줌
 			} catch (IOException e) {
 				System.err.println("오류 " + e);
 			}
@@ -141,19 +143,19 @@ public class LoginController implements Initializable {
 			alert.setResizable(false);
 			alert.showAndWait();
 
-			txtId.clear();
-			txtPw.clear();
+			txtId.clear();//텍스트 id 값 초기화
+			txtPw.clear();//텍스트 pw 값 초기화
 		}
 	}
 
 	// 선생님이름 불러오기
 	public String loginName() {
-		LoginDAO ldao = new LoginDAO();
+		LoginDAO ldao = new LoginDAO();//ldao 객체 생성
 
-		String name = null;
+		String name = null; //이름 null값으로 선언
 
 		try {
-			name = ldao.getLoginName(txtId.getText());
+			name = ldao.getLoginName(txtId.getText()); //LoginDAO에서 텍스트 아이디를 가져옴
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -162,12 +164,12 @@ public class LoginController implements Initializable {
 
 	// 선생님과목 불러오기 이름 변경할것
 	public String loginName1() {
-		LoginDAO ldao = new LoginDAO();
+		LoginDAO ldao = new LoginDAO(); //ldao 객체 생성
 
-		String name = null;
+		String name = null; //이름 null값으로 선언
 
 		try {
-			name = ldao.getLoginName1(txtId.getText());
+			name = ldao.getLoginName1(txtId.getText());//LoginDAO에서 텍스트 아이디를 가져옴
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

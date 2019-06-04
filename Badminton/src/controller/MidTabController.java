@@ -67,11 +67,11 @@ public class MidTabController implements Initializable {
 
 	}
 
-	// 버튼 이벤트 활성화 1일~16일
+	// 버튼 이벤트 활성화 1회차~16회차
 
 	public void handlerbtnday16Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 16회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("토너먼트 해보기");
 		alert.showAndWait();
@@ -79,7 +79,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday15Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 15회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("강사가 학생들의 자세 와 기술들을 수정해줌");
 		alert.showAndWait();
@@ -87,7 +87,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday14Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 14회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("2명에서 1조를 만들어서 서로 기술들 응용해서 자유롭게 치기");
 		alert.showAndWait();
@@ -95,7 +95,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday13Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 13회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("시합 해보기");
 		alert.showAndWait();
@@ -103,7 +103,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday12Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 12회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("연습 시합 해보기");
 		alert.showAndWait();
@@ -111,7 +111,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday11Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 11회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("배드민턴 시합 영상 보기");
 		alert.showAndWait();
@@ -119,7 +119,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday10Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 10회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("시합 규칙&& 과정 익히기");
 		alert.showAndWait();
@@ -127,7 +127,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday9Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 9회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("스매시 배우기");
 		alert.showAndWait();
@@ -135,7 +135,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday8Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 8회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("백핸드와 포핸드 익히기");
 		alert.showAndWait();
@@ -143,7 +143,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday7Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 7회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("헤어핀 배우기");
 		alert.showAndWait();
@@ -151,7 +151,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday6Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 6회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("드롭샷 백핸드 드롭샷 배우기");
 		alert.showAndWait();
@@ -159,7 +159,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday5Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 5회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("드라이브(좌측)배우기");
 		alert.showAndWait();
@@ -167,7 +167,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday4Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 4회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("드라이브(우측)배우기");
 		alert.showAndWait();
@@ -175,7 +175,7 @@ public class MidTabController implements Initializable {
 
 	private void handlerbtnday3Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 3회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("포핸드언더(좌측)배우기");
 		alert.showAndWait();
@@ -184,7 +184,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday2Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 2회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("포핸드언더(우측)배우기");
 		alert.showAndWait();
@@ -193,7 +193,7 @@ public class MidTabController implements Initializable {
 
 	public void handlerbtnday1Action(ActionEvent event) {
 		Alert alert = new Alert(AlertType.INFORMATION);
-		alert.setTitle("레슨 중급");
+		alert.setTitle("레슨 중급 1회차");
 		alert.setHeaderText("미래 중학교 배드민턴 중급");
 		alert.setContentText("배드민턴 기술들 영상으로 보기");
 		alert.showAndWait();

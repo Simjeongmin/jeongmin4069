@@ -1,4 +1,4 @@
-package controller;
+	package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,23 +14,23 @@ import javafx.scene.control.TabPane;
 
 public class BadmintonplayController implements Initializable {
 	@FXML
-	private TabPane mainPane;
+	private TabPane mainPane;// 탭 메인탭
 	@FXML
-	private Tab check;
+	private Tab check;//탭 등록
 	@FXML
-	private Tab low;
+	private Tab low;// 탭 초급
 	@FXML
-	private Tab mid;
+	private Tab mid;// 탭 중급
 	@FXML
-	private Tab high;
+	private Tab high;// 탭 고급
 	
 	//메뉴	
 	@FXML
-	private MenuItem menulow;
+	private MenuItem menulow;//메뉴 초급
 	@FXML
-	private MenuItem menumid;
+	private MenuItem menumid;//메뉴 중급
 	@FXML
-	private MenuItem menuhigh;
+	private MenuItem menuhigh;//메뉴 고급
 	
 	
 	

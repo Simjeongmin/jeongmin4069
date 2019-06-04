@@ -8,22 +8,22 @@
 	
 	<children>
 	<Label text="고급 레슨" layoutX="220" layoutY="10"  scaleX="3" scaleY="3"/>
-	<Button fx:id="btnday1" layoutX="20" layoutY="50" text="1일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday2" layoutX="140" layoutY="50" text="2일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday3" layoutX="260" layoutY="50" text="3일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday4" layoutX="380" layoutY="50" text="4일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday5" layoutX="20" layoutY="170" text="5일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday6" layoutX="140" layoutY="170" text="6일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday7" layoutX="260" layoutY="170" text="7일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday8" layoutX="380" layoutY="170" text="8일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday9" layoutX="20" layoutY="290" text="9일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday10" layoutX="140" layoutY="290" text="10일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday11" layoutX="260" layoutY="290" text="11일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday12" layoutX="380" layoutY="290" text="12일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday13" layoutX="20" layoutY="410" text="13일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday14" layoutX="140" layoutY="410" text="14일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday15" layoutX="260" layoutY="410" text="15일" prefHeight="100" prefWidth="100"/>
-	<Button fx:id="btnday16" layoutX="380" layoutY="410" text="16일" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday1" layoutX="20" layoutY="50" text="1회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday2" layoutX="140" layoutY="50" text="2회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday3" layoutX="260" layoutY="50" text="3회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday4" layoutX="380" layoutY="50" text="4회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday5" layoutX="20" layoutY="170" text="5회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday6" layoutX="140" layoutY="170" text="6회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday7" layoutX="260" layoutY="170" text="7회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday8" layoutX="380" layoutY="170" text="8회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday9" layoutX="20" layoutY="290" text="9회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday10" layoutX="140" layoutY="290" text="10회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday11" layoutX="260" layoutY="290" text="11회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday12" layoutX="380" layoutY="290" text="12회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday13" layoutX="20" layoutY="410" text="13회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday14" layoutX="140" layoutY="410" text="14회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday15" layoutX="260" layoutY="410" text="15회차" prefHeight="100" prefWidth="100"/>
+	<Button fx:id="btnday16" layoutX="380" layoutY="410" text="16회차" prefHeight="100" prefWidth="100"/>
 	</children>
 	
 </AnchorPane>

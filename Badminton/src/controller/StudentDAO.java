@@ -16,6 +16,7 @@ public class StudentDAO {
 	public StudentVO getStudentregiste(StudentVO sVo) throws Exception {
 		// 2 데이터 처리를 위한 sql문
 		StringBuffer sql = new StringBuffer();
+		// 정보를 삽입하기위한 sql문
 		sql.append("insert into student  ");
 		sql.append("(S_code, S_name, S_year, S_ban, " + "S_number, S_gender, S_phone , "
 				+ "S_emergency, S_costfree, S_time, " + "S_experience, S_level, S_startdate,"
@@ -77,6 +78,7 @@ public class StudentDAO {
 	public ArrayList<StudentVO> getStudentTotal() {
 		ArrayList<StudentVO> list = new ArrayList<StudentVO>();
 		StringBuffer sql = new StringBuffer();
+		// 출석부 학생 리스트를 표시하기위한 sql문
 		sql.append("select S_code, S_name, S_year, S_ban, S_number, S_gender, ");
 		sql.append("S_phone, S_emergency, S_costfree, S_time, S_experience, S_level, ");
 		sql.append(
@@ -87,11 +89,11 @@ public class StudentDAO {
 		ResultSet rs = null;
 		StudentVO sVo = null;
 		try {
-			con = DBUtil.getConnection();
+			con = DBUtil.getConnection();// DBUtil 연결
 			pstmt = con.prepareStatement(sql.toString());
-			rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();// 결과물을 rs객체를 통해서 반환
 			while (rs.next()) {
-				sVo = new StudentVO();
+				sVo = new StudentVO();// sVo 인스턴스화
 				sVo.setS_code(rs.getInt("S_code"));
 				sVo.setS_name(rs.getString("S_name"));
 				sVo.setS_year(rs.getInt("S_year"));
@@ -138,6 +140,7 @@ public class StudentDAO {
 	public ArrayList<StudentVO> getStudentTotal1() {
 		ArrayList<StudentVO> list = new ArrayList<StudentVO>();
 		StringBuffer sql = new StringBuffer();
+		// 테이블에 표시할 sql문
 		sql.append("select S_code, S_name, S_year, S_ban, S_number, S_gender, ");
 		sql.append("S_phone, S_emergency, S_costfree, S_time, S_experience, S_level, ");
 		sql.append("S_startdate, S_enddate, S_email, S_image, S_come from student order by S_code desc");
@@ -147,11 +150,11 @@ public class StudentDAO {
 		ResultSet rs = null;
 		StudentVO sVo = null;
 		try {
-			con = DBUtil.getConnection();
+			con = DBUtil.getConnection();// DButil 연결
 			pstmt = con.prepareStatement(sql.toString());
-			rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();// 결과물을 rs객체를 통해서 반환
 			while (rs.next()) {
-				sVo = new StudentVO();
+				sVo = new StudentVO();// sVo 인스턴스화
 				sVo.setS_code(rs.getInt("S_code"));
 				sVo.setS_name(rs.getString("S_name"));
 				sVo.setS_year(rs.getInt("S_year"));
@@ -177,7 +180,9 @@ public class StudentDAO {
 
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally {
+		}
+		// 연결을 해제한다
+		finally {
 			try {
 				if (rs != null)
 					rs.close();
@@ -197,6 +202,7 @@ public class StudentDAO {
 	public ArrayList<String> getColumnName() {
 		ArrayList<String> columnName = new ArrayList<String>();
 		StringBuffer sql = new StringBuffer();
+		// 학생의 테이블 컬럼갯수를 표시하는 SQL문
 		sql.append("select * from student");
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -204,7 +210,7 @@ public class StudentDAO {
 		// ResultSetMetaData 객체선언
 		ResultSetMetaData rsmd = null;
 		try {
-			con = DBUtil.getConnection();
+			con = DBUtil.getConnection();// DButil 연결
 			pstmt = con.prepareStatement(sql.toString());
 			rs = pstmt.executeQuery();
 			rsmd = rs.getMetaData();
@@ -216,7 +222,9 @@ public class StudentDAO {
 			System.out.print(se);
 		} catch (Exception e) {
 			System.out.println(e);
-		} finally {
+		}
+		// 연결을 해제한다
+		finally {
 			try {
 				if (rs != null)
 					rs.close();
@@ -236,6 +244,7 @@ public class StudentDAO {
 	public StudentVO getStudentUpdate(StudentVO sVo, int s_code) throws Exception {
 		// 2 데이터처리를 위한 sql문
 		StringBuffer sql = new StringBuffer();
+		//수정을 위한 sql문
 		sql.append("update student set");
 		sql.append(" S_name=?, S_year=?, S_ban=?, S_number=?, S_phone=? ");
 		sql.append(" where s_code = ?");
@@ -257,13 +266,13 @@ public class StudentDAO {
 			// 5 sql문을 수행후 처리 결과를 얻어옴
 			int i = pstmt.executeUpdate();
 
-			if (i == 1) {
+			if (i==1) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("학생 정보 수정");
 				alert.setHeaderText("학생 정보 수정 완료!");
 				alert.setContentText("학생 정보 수정 완료!!");
 				alert.showAndWait();
-				retval = new StudentVO();
+				//retval = new StudentVO();
 			} else {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setTitle("학생 정보 수정");
@@ -294,6 +303,7 @@ public class StudentDAO {
 	public void getStudentDelete(int s_Code) throws Exception {
 		// 2 데이터 처리를 위한 sql문
 		StringBuffer sql = new StringBuffer();
+		//학생삭제를 위한 sql문 
 		sql.append("delete from student where s_code = ?");
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -323,8 +333,11 @@ public class StudentDAO {
 
 			}
 		} catch (SQLException e) {
-			System.out.println("3e=[" + e + "]");
-			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("오류");
+			alert.setHeaderText("학생 삭제를 하실라면 먼저 출석부에서 삭제를 하세요");
+			alert.setContentText("학생 삭제 오류");
+			alert.showAndWait();
 
 		} catch (Exception e) {
 			System.out.println("4e=[" + e + "]");

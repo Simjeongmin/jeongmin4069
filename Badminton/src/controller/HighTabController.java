@@ -68,11 +68,11 @@ public class HighTabController implements Initializable {
 			}
 
 		 
-			//버튼 이벤트 활성화 1일~16일
+			//버튼 이벤트 활성화 1회차~16회차
 			
 			public void handlerbtnday16Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 16회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("전국대회 예선전 나가기");
 				alert.showAndWait();
@@ -82,7 +82,7 @@ public class HighTabController implements Initializable {
 
 			public void handlerbtnday15Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 15회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("학교대전 복식 대회 나가기");
 				alert.showAndWait();
@@ -92,7 +92,7 @@ public class HighTabController implements Initializable {
 
 			public void handlerbtnday14Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 14회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("학교대전 단식 대회 나가기");
 				alert.showAndWait();
@@ -102,7 +102,7 @@ public class HighTabController implements Initializable {
 
 			public void handlerbtnday13Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 13회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("다른학교와 단식 복식 경기 해보기");
 				alert.showAndWait();
@@ -112,7 +112,7 @@ public class HighTabController implements Initializable {
 
 			public void handlerbtnday12Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 12회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("복식 토너먼트");
 				alert.showAndWait();
@@ -122,7 +122,7 @@ public class HighTabController implements Initializable {
 
 			public void handlerbtnday11Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 11회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("단식 토너먼트");
 				alert.showAndWait();
@@ -132,7 +132,7 @@ public class HighTabController implements Initializable {
 
 			public void handlerbtnday10Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 10회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("고급반끼리 복식 연습");
 				alert.showAndWait();
@@ -140,7 +140,7 @@ public class HighTabController implements Initializable {
 			
 			public void handlerbtnday9Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 9회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("고급반끼리 단식 연습 ");
 				alert.showAndWait();
@@ -148,7 +148,7 @@ public class HighTabController implements Initializable {
 
 			public void handlerbtnday8Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 8회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("복식 규칙 익히기");
 				alert.showAndWait();
@@ -156,7 +156,7 @@ public class HighTabController implements Initializable {
 
 			public void handlerbtnday7Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 7회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("단식 규칙 익히기 ");
 				alert.showAndWait();
@@ -164,7 +164,7 @@ public class HighTabController implements Initializable {
 
 			public void handlerbtnday6Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 6회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("드라이버서브 익히기");
 				alert.showAndWait();
@@ -172,7 +172,7 @@ public class HighTabController implements Initializable {
 
 			public void handlerbtnday5Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 5회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("롱서브 익히기");
 				alert.showAndWait();
@@ -180,7 +180,7 @@ public class HighTabController implements Initializable {
 
 			public void handlerbtnday4Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 4회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("숏서브 익히기");
 				alert.showAndWait();
@@ -188,7 +188,7 @@ public class HighTabController implements Initializable {
 
 			private void handlerbtnday3Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 3회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("점프스매시 익히기");
 				alert.showAndWait();
@@ -197,7 +197,7 @@ public class HighTabController implements Initializable {
 
 			public void handlerbtnday2Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 2회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("스트레이트스매시 익히기");
 				alert.showAndWait();
@@ -206,7 +206,7 @@ public class HighTabController implements Initializable {
 
 			public void handlerbtnday1Action(ActionEvent event) {
 				Alert alert = new Alert(AlertType.INFORMATION);
-				alert.setTitle("레슨 고급");
+				alert.setTitle("레슨 고급 1회차");
 				alert.setHeaderText("미래 중학교 배드민턴 고급");
 				alert.setContentText("배드민턴 선수들 단식 복식 경기 영상 시청하기");
 				alert.showAndWait();

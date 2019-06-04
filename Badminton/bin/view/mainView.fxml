@@ -45,7 +45,7 @@
 						<spacing>10</spacing>
 						<children>				<!-- 자식 컨트롤 추가 -->
 							<Label text="성명 : " />
-							<TextField fx:id="txtName" prefWidth="80" text="" />
+							<TextField fx:id="txtName" prefWidth="160" text="" promptText="최대6자"/>
 						</children>
 					</HBox>
 					<HBox>
